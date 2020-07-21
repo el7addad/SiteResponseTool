@@ -90,6 +90,7 @@ int main(int argc, char *argv[])
     // regular Qt startup
     //
     QApplication a(argc, argv);
+    Q_INIT_RESOURCE(images1);
 
     // with a splash
     QSplashScreen *splash = new QSplashScreen;
