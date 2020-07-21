@@ -38,6 +38,10 @@
 #include <BandGenLinLapackSolver.h>
 #include <BandGenLinSOE.h>
 #include <math.h>
+#include <complex>
+#define lapack_complex_float std::complex<float>
+#define lapack_complex_double std::complex<double>
+#include <lapacke.h>
 
 void* OPS_BandGenLinLapack()
 {
@@ -59,27 +63,7 @@ BandGenLinLapackSolver::~BandGenLinLapackSolver()
 	delete [] iPiv;
 }
 
-#ifdef _WIN32
 
-extern "C" int DGBSV(int *N, int *KL, int *KU, int *NRHS, double *A, 
-			      int *LDA, int *iPiv, double *B, int *LDB, 
-			      int *INFO);
-
-extern "C" int DGBTRS(char *TRANS, 
-			       int *N, int *KL, int *KU, int *NRHS,
-			       double *A, int *LDA, int *iPiv, 
-			       double *B, int *LDB, int *INFO);
-
-#else
-
-extern "C" int dgbsv_(int *N, int *KL, int *KU, int *NRHS, double *A, 
-		      int *LDA, int *iPiv, double *B, int *LDB, int *INFO);
-		      
-
-extern "C" int dgbtrs_(char *TRANS, int *N, int *KL, int *KU, int *NRHS, 
-		       double *A, int *LDA, int *iPiv, double *B, int *LDB, 
-		       int *INFO);
-#endif
 int
 BandGenLinLapackSolver::solve(void)
 {
@@ -116,28 +100,15 @@ BandGenLinLapackSolver::solve(void)
 
     // now solve AX = B
 
-#ifdef _WIN32
-    {if (theSOE->factored == false)  
-	// factor and solve 
-	DGBSV(&n,&kl,&ku,&nrhs,Aptr,&ldA,iPIV,Xptr,&ldB,&info);	
+    if (theSOE->factored == false)
+        // factor and solve
+        LAPACK_dgbsv(&n,&kl,&ku,&nrhs,Aptr,&ldA,iPIV,Xptr,&ldB,&info);
     else  {
-	// solve only using factored matrix
-	unsigned int sizeC = 1;
-	//DGBTRS("N", &sizeC, &n,&kl,&ku,&nrhs,Aptr,&ldA,iPIV,Xptr,&ldB,&info);
-    char temp[] = "N";
-    DGBTRS(temp, &n,&kl,&ku,&nrhs,Aptr,&ldA,iPIV,Xptr,&ldB,&info);
-    }}
-#else
-    {if (theSOE->factored == false)
-            // factor and solve
-            dgbsv_(&n,&kl,&ku,&nrhs,Aptr,&ldA,iPIV,Xptr,&ldB,&info);
-        else {
-            // solve only using factored matrix
-            char temp[] = "N";
-            dgbtrs_(temp,&n,&kl,&ku,&nrhs,Aptr,&ldA,iPIV,Xptr,&ldB,&info);
-        }
+        // solve only using factored matrix
+        char temp[] = "N";
+        LAPACK_dgbtrs(temp, &n,&kl,&ku,&nrhs,Aptr,&ldA,iPIV,Xptr,&ldB,&info);
     }
-#endif
+
     // check if successfull
     if (info != 0) {
 	opserr << "WARNING BandGenLinLapackSolver::solve() -";
