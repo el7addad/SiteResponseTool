@@ -4,39 +4,8 @@ INCLUDEPATH += $$PWD/ \
                $$PWD/Include \
                $$PWD/FEM \
                $$PWD/SiteResponse \
-               $$PWD/UI \
-               #/Users/simcenter/Codes/Research/OpenSees/OpenSees/OTHER/SuperLU_5.1.1/SRC
+               $$PWD/UI
 
-unix {
-# You need to modify this section if your blas and lapack is in a different place
-INCLUDEPATH += /usr/local/opt/lapack/include \
-               /usr/local/include \
-
-
-# You need to modify this section if your blas and lapack is in a different place
-#LIBS += /usr/local/opt/lapack/lib/libblas.3.8.0.dylib \
-#        /usr/local/opt/lapack/lib/liblapack.3.8.0.dylib \
-#        /usr/local/opt/lapack/lib/liblapacke.3.8.0.dylib \
-#        -L/usr/local/lib -L/usr/lib  -lm -ldl -lgfortran
-LIBS += -llapack
-}
-
-win32: {
-# You must append your lapack include path if it is not in a standard place.
-INCLUDEPATH += FEM \
-            += SiteResponse
-
-LIBS += "The path to the file lapack.lib"
-LIBS += "The path to the file blas.lib"
-LIBS += "The path to the file libifcoremt.lib"
-LIBS += "The path to the file libirc.lib"
-LIBS += "The path to the file ifconsol.lib"
-LIBS += "The path to the file libifport.lib"
-LIBS += "The path to the file libmmt.lib"
-LIBS += "The path to the file svml_dispmt.lib"
-# You must append your lapack include path if it is not in a standard place.
-LIBS += -L"$$_PRO_FILE_PWD_/lib"
-}
 
 
 SOURCES += $$PWD/UI/RockOutcrop.cpp \
@@ -45,7 +14,6 @@ SOURCES += $$PWD/UI/RockOutcrop.cpp \
     $$PWD/UI/BonzaTableModel.cpp \
     $$PWD/UI/SiteResponse.cpp \
     $$PWD/UI/TabManager.cpp \
-    #$$PWD/SiteResponse/Mesher.cpp \
     $$PWD/UI/JsonManager.cpp \
     $$PWD/UI/ElementModel.cpp \
     $$PWD/FEM/PM4Sand.cpp \
@@ -77,7 +45,6 @@ SOURCES += $$PWD/UI/RockOutcrop.cpp \
     $$PWD/FEM/DataFileStreamAdd.cpp \
     $$PWD/FEM/DirectIntegrationAnalysis.cpp \
     $$PWD/FEM/DispBeamColumn3d.cpp \
-    #$$PWD/FEM/DispBeamColumn3dWithSensitivity.cpp \
     $$PWD/FEM/DOF_Group.cpp \
     $$PWD/FEM/DOF_GrpIter.cpp \
     $$PWD/FEM/DOF_Numberer.cpp \
@@ -86,8 +53,6 @@ SOURCES += $$PWD/UI/RockOutcrop.cpp \
     $$PWD/FEM/DummyElementAPI.cpp \
     $$PWD/FEM/DummyStream.cpp \
     $$PWD/FEM/EarthquakePattern.cpp \
-    #$$PWD/FEM/EigenSOE.cpp \
-    #$$PWD/FEM/EigenSolver.cpp \
     $$PWD/FEM/ElasticIsotropicThreeDimensional.cpp \
     $$PWD/FEM/ElasticMaterial.cpp \
     $$PWD/FEM/ElasticSection3d.cpp \
@@ -171,7 +136,6 @@ SOURCES += $$PWD/UI/RockOutcrop.cpp \
     $$PWD/FEM/SimulationInformation.cpp \
     $$PWD/FEM/SingleDomAllSP_Iter.cpp \
     $$PWD/FEM/SingleDomEleIter.cpp \
-    #$$PWD/FEM/SingleDomLC_Iter.cpp \
     $$PWD/FEM/SingleDomMP_Iter.cpp \
     $$PWD/FEM/SingleDomNodIter.cpp \
     $$PWD/FEM/SingleDomParamIter.cpp \
@@ -203,10 +167,7 @@ SOURCES += $$PWD/UI/RockOutcrop.cpp \
     $$PWD/FEM/Vertex.cpp \
     $$PWD/FEM/VertexIter.cpp \
     $$PWD/FEM/ViscousMaterial.cpp \
-    #$$PWD/FEM/win32Functions.cpp \
-    #$$PWD/FEM/ErrorHandler.cpp \
     $$PWD/FEM/ElasticIsotropicPlaneStrain2D.cpp \
-    #$$PWD/FEM/ElasticIsotropicPlaneStress2D.cpp \
     $$PWD/FEM/MultiYieldSurface.cpp \
     $$PWD/FEM/PressureDependMultiYield02.cpp \
     $$PWD/FEM/PressureDependMultiYield.cpp \
@@ -216,19 +177,11 @@ SOURCES += $$PWD/UI/RockOutcrop.cpp \
     $$PWD/SiteResponse/soillayer.cpp \
     $$PWD/SiteResponse/siteLayering.cpp \
     $$PWD/SiteResponse/outcropMotion.cpp \
-    #$$PWD/SiteResponse/FEModel3D.cpp
     $$PWD/UI/ProfileManager.cpp \
     $$PWD/UI/PostProcessor.cpp \
     $$PWD/UI/SSSharkThread.cpp \
     $$PWD/FEM/T2Vector.cpp \
-    $$PWD/FEM/PlainHandler.cpp \
-    #$$PWD/FEM/SuperLU.cpp \
-    #$$PWD/FEM/SparseGenColLinSOE.cpp \
-    #$$PWD/FEM/Accelerator.cpp \
-    #$$PWD/FEM/AcceleratedNewton.cpp \
-    #$$PWD/FEM/KrylovAccelerator.cpp \
-    #$$PWD/FEM/KrylovNewton.cpp \
-    #$$PWD/FEM/SparseGenColLinSolver.cpp
+    $$PWD/FEM/PlainHandler.cpp 
 
 
 HEADERS  += $$PWD/UI/RockOutcrop.h \
@@ -238,7 +191,6 @@ HEADERS  += $$PWD/UI/RockOutcrop.h \
     $$PWD/UI/BonzaTableModel.h \
     $$PWD/UI/SiteResponse.h \
     $$PWD/UI/TabManager.h \
-    #$$PWD/SiteResponse/Mesher.h \
     $$PWD/UI/JsonManager.h \
     $$PWD/UI/ElementModel.h \
     $$PWD/FEM/PM4Sand.h \
@@ -267,7 +219,6 @@ HEADERS  += $$PWD/UI/RockOutcrop.h \
     $$PWD/FEM/DataFileStreamAdd.h \
     $$PWD/FEM/DirectIntegrationAnalysis.h \
     $$PWD/FEM/DispBeamColumn3d.h \
-    #$$PWD/FEM/DispBeamColumn3dWithSensitivity.h \
     $$PWD/FEM/DOF_Group.h \
     $$PWD/FEM/DOF_GrpIter.h \
     $$PWD/FEM/DOF_Numberer.h \
@@ -276,8 +227,6 @@ HEADERS  += $$PWD/UI/RockOutcrop.h \
     $$PWD/FEM/DomainDecompositionAnalysis.h \
     $$PWD/FEM/DummyStream.h \
     $$PWD/FEM/EarthquakePattern.h \
-    #$$PWD/FEM/EigenSOE.h \
-    #$$PWD/FEM/EigenSolver.h \
     $$PWD/FEM/ElasticIsotropicMaterial.h \
     $$PWD/FEM/ElasticIsotropicThreeDimensional.h \
     $$PWD/FEM/ElasticMaterial.h \
@@ -373,7 +322,6 @@ HEADERS  += $$PWD/UI/RockOutcrop.h \
     $$PWD/FEM/SimulationInformation.h \
     $$PWD/FEM/SingleDomAllSP_Iter.h \
     $$PWD/FEM/SingleDomEleIter.h \
-    #$$PWD/FEM/SingleDomLC_Iter.h \
     $$PWD/FEM/SingleDomMP_Iter.h \
     $$PWD/FEM/SingleDomNodIter.h \
     $$PWD/FEM/SingleDomParamIter.h \
@@ -410,9 +358,7 @@ HEADERS  += $$PWD/UI/RockOutcrop.h \
     $$PWD/FEM/VertexIter.h \
     $$PWD/FEM/ViscousMaterial.h \
     $$PWD/FEM/ZeroLength.h \
-    #$$PWD/FEM/ErrorHandler.h \
     $$PWD/FEM/ElasticIsotropicPlaneStrain2D.h \
-    #$$PWD/FEM/ElasticIsotropicPlaneStress2D.h \
     $$PWD/FEM/SSPquad.h \
     $$PWD/FEM/SSPquadUP.h \
     $$PWD/FEM/MultiYieldSurface.h \
@@ -428,19 +374,10 @@ HEADERS  += $$PWD/UI/RockOutcrop.h \
     $$PWD/UI/PostProcessor.h \
     $$PWD/UI/SSSharkThread.h \
     $$PWD/FEM/T2Vector.h \
-    $$PWD/FEM/PlainHandler.h \
-
-    #$$PWD/FEM/SuperLU.h \
-    #$$PWD/FEM/SparseGenColLinSOE.h \
-    #$$PWD/FEM/Accelerator.h \
-    #$$PWD/FEM/AcceleratedNewton.h \
-    #$$PWD/FEM/KrylovAccelerator.h \
-    #$$PWD/FEM/KrylovNewton.h \
-    #$$PWD/FEM/SparseGenColLinSolver.h
+    $$PWD/FEM/PlainHandler.h 
 
 
-FORMS    += $$PWD/UI/MainWindow.ui \
-    $$PWD/UI/RockOutcrop.ui \
+FORMS    += $$PWD/UI/RockOutcrop.ui \
     $$PWD/UI/InsertWindow.ui \
     $$PWD/UI/PM4Sand.ui \
     $$PWD/UI/PM4Silt.ui \

@@ -27,7 +27,8 @@ SOURCES += $$PWD/main.cpp \
 
 HEADERS  += $$PWD/UI/MainWindow.h
 
-#include(./SimCenterCommon/Common/Common.pri)
+FORMS    += $$PWD/UI/MainWindow.ui
+
 include($$PWD/ConanHelper.pri)
 include(./s3hark.pri)
 

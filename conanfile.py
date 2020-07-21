@@ -3,23 +3,22 @@ import os
 
 class S3harkConan(ConanFile):
     name = "s3hark"
-    version = "1.1.1.1"
+    version = "1.1.2"
     license = "BSD"
     author = "Charles Wang (c_w@berkeley.edu)"
     url = "https://github.com/NHERI-SimCenter/s3hark"
     description = "A Tool For Site Response Analysis"
     settings = "os", "compiler", "build_type", "arch"
     generators = "qmake", "cmake"
-    requires = "lapack/3.7.1@conan/stable", "SimCenterCommonQt/0.1.1@simcenter/testing"
+    requires = "lapack/3.7.1@conan/stable", "SimCenterCommonQt/0.1.7@simcenter/stable"
     build_policy = "missing"
     
     options = {
-        "MDOFwithQt3D": [True, False],
         "withQt":[True, False]
     }
 
 
-    default_options = {"MDOFwithQt3D": False, "withQt": False}
+    default_options = {"withQt": False}
 
     scm = {
          "type": "git",
@@ -64,9 +63,7 @@ class S3harkConan(ConanFile):
             qmake = 'qmake'
             makeCommand = 'make'
 
-        qmakeCommand = '%s "CONFIG+=%s" %s/s3hark.pro' % (qmake, self.settings.build_type, self.source_folder)
-        if(self.options.MDOFwithQt3D):
-            qmakeCommand += ' "DEFINES+=_GRAPHICS_Qt3D"'
+        qmakeCommand = '%s "CONFIG+=%s" %s/s3harkLib.pro' % (qmake, self.settings.build_type, self.source_folder)
 
         self.run(qmakeCommand, run_environment=True) 
         self.run(makeCommand, run_environment=True) 
@@ -74,24 +71,16 @@ class S3harkConan(ConanFile):
 
 
     def package(self):
+        self.copy("*", src="include", dst="include", keep_path=True)
         self.copy("*.h", src="FEM", dst="include", keep_path=False)
         self.copy("*.h", src="UI", dst="include", keep_path=False)
-        self.copy("*.hpp", src="Include/nlohmann", dst="include", keep_path=False)
-        
+        self.copy("*.h", src="SiteResponse", dst="include", keep_path=False)
+        self.copy("*.h", src=".", dst="include", keep_path=False)
+
         self.copy("*s3hark.lib", dst="lib", keep_path=False)
         self.copy("*s3hark.a", dst="lib", keep_path=False)
-
-        self.copy("s3hark.app", dst="bin", keep_path=False)
-
-        print("aaaa")
-        import os
-        cmd = "pwd"
-        returned_value = os.system(cmd)  # returns the exit code in unix
-        print('returned value:', returned_value)
-        cmd = "ls -ltr"
-        returned_value = os.system(cmd)  # returns the exit code in unix
-        print('returned value:', returned_value)
-        
+		
+        self.copy("*", src="resources", dst="resources", keep_path=True)
 
 
     def package_info(self):
