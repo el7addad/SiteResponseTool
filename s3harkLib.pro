@@ -23,4 +23,4 @@ win32 {
 include($$PWD/ConanHelper.pri)
 include(./s3hark.pri)
 
-OTHER_FILES += conanfile.py
+OTHER_FILES += conanfile.py azure-pipelines.yml build.py
