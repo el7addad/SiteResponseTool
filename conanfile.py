@@ -37,7 +37,9 @@ class S3harkConan(ConanFile):
         if self.options.withQt:
             self.options["qt"].qtcharts = True
             self.options["qt"].qt3d = True
-
+            self.options["qt"].qtwebengine = True
+            self.options["qt"].qtwebchannel = True
+            self.options["qt"].qtdeclarative = True
 
     def build_requirements(self):
         if self.settings.os == "Windows":

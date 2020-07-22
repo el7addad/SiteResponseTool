@@ -29,7 +29,7 @@ pool:
 variables:
 - group: ConanVariables
 - name: CONAN_OPTIONS
-  value: "SimCenterCommonQt:withQt=True"
+  value: "s3hark:withQt=True"
 - name: CONAN_LOGIN_USERNAME
   value: $(BintrayUsername)
 
