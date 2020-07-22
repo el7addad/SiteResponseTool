@@ -48,7 +48,8 @@ class S3harkConan(ConanFile):
         
         if self.options.withQt:
             self.build_requires("qt/5.14.2@bincrafters/stable")
-
+            self.requires("zlib/1.2.11@conan/stable")
+            self.requires("OpenSSL/1.1.1c@conan/stable")
 
     def package_id(self):
         del self.info.options.withQt
