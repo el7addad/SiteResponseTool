@@ -47,7 +47,7 @@ class S3harkConan(ConanFile):
             self.build_requires("jom_installer/1.1.2@bincrafters/stable")
         
         if self.options.withQt:
-            self.build_requires("qt/5.11.3@bincrafters/stable")
+            self.build_requires("qt/5.14.2@bincrafters/stable")
 
 
     def package_id(self):
