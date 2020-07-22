@@ -40,13 +40,14 @@ class S3harkConan(ConanFile):
             self.options["qt"].qtwebengine = True
             self.options["qt"].qtwebchannel = True
             self.options["qt"].qtdeclarative = True
+            self.options["qt"].qttools = True
 
     def build_requirements(self):
         if self.settings.os == "Windows":
             self.build_requires("jom_installer/1.1.2@bincrafters/stable")
         
         if self.options.withQt:
-            self.build_requires("qt/5.12.2@bincrafters/stable")
+            self.build_requires("qt/5.11.3@bincrafters/stable")
 
 
     def package_id(self):
